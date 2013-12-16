@@ -73,17 +73,18 @@ the BookPersistence class you will find the method `getBooksByAuthor(String id)`
 ----------
 - All needed views are generate in the __resources\couchbase\views__
 - They are one js file per entity
-- The file is structured as follows :  
-Each block represent a view :   
-`
-    //startview [view_name]    
+- The file is a succession of blocks structured as follows :  
+__Each block represent a view :__
+
+```javascript
+	//startview [view_name]
     function (doc, meta) {  
       if(meta.id.match("Author:")) (  
        emit(meta.id, null)  
       )  
-    }   
-    //endview  
-`  
+    } 
+    //endview 
+```
 - If you want to create a new view, you have to respect this syntax.
 - You can add view on existing js files or create new ones.
 - The `DatabaseConnectionProvider.initDatabase()` will create or update your modifications __directly on the Couchbase server__.
