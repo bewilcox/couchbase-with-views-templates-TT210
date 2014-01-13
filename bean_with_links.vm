@@ -16,7 +16,7 @@ package ${target.javaPackageFromFolder($SRC)};
 
 import java.io.Serializable;
 
-#foreach( $import in $entity.imports )
+#foreach( $import in $java.imports($entity) )
 import $import;
 #end
 
@@ -29,7 +29,7 @@ import $import;
 #end
 #end
 #if($showImportslinkType == 1)
-import java.util.List;
+
 #end
 /**
  * POJO class for "${entity.databaseTable}" documents.
@@ -76,7 +76,7 @@ public class $entity.name implements Serializable
 #set($linkType = $link.formatedType(1))
     private $linkType $link.formatedName(0);
 #else
-    // Lazy like fetching for $link.targetEntity, so no link in the document. Use query.
+    // Lazy like fetching for $link.targetEntityType, so no link in the document. Use query.
 #end
 #end
 #end
@@ -147,7 +147,7 @@ public class $entity.name implements Serializable
 #set($linkType = $link.formatedType(1))
 #else
 #set($showAccessors = 0)
-    // Lazy like fetching for $link.targetEntity, so no link in the document. Use query.
+    // Lazy like fetching for $link.targetEntityType, so no link in the document. Use query.
 #end
 #end
 #if($showAccessors == 1)

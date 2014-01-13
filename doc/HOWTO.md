@@ -4,7 +4,9 @@ Tutorial for the Telosys Couchbase bundle
 Note
 -----
 For this tutorial, we start from a derby database. This database manage a bookstore (Book, Author, Reviews etc ..). 
-You can follow this tutorial with your own database.
+You can follow this tutorial with your own database.  
+If you want to start with the same db : [https://dl.dropboxusercontent.com/u/52079610/BookstoreDB_v2_Derby10.9.zip](https://dl.dropboxusercontent.com/u/52079610/BookstoreDB_v2_Derby10.9.zip)  
+The database name is bookstore and user/pwd is root/admin.
 
 1. Project Creation
 ----------------
@@ -30,22 +32,18 @@ You can follow this tutorial with your own database.
 
 4. Database repository generation
 -------------------------------
-- Open the database configuration file : "Telosys Tools / databases.dbcfg"
+- Open the database configuration file : "TelosysTools / databases.dbcfg"
 - The database editor is displayed
 - Add a new connection to your database
 - Test the connection to get "Connection is OK"
-- Click on "Information" tab and click on "Get database info" button to verify database connection
-- Click on "Meta-data" tab and click on "Get tables" to see the tables of your database
-- If all is OK, click on "Generate repository" button to generate a new ".dbrep" file in the "TelosysTools/repos" directory 
+- Click on "Meta-data" tab, fill the schema name and click on "Get tables" to see the tables of your database
+- If all is OK, click on "Generate repository" button to generate a new ".dbrep" file in the "TelosysTools/" directory 
 
 5. Manage entities links
 -----------------------
-- Open the ".dbrep" file in the "TelosysTools/repos" directory
-- Go to the __"Links between entities" tab.
-- Click on __"Generate links from foreign keys"__ button which is located __at bottom of the tab__
-- You can see now the links between all entities
+- __All the links are generated__ automatically and they are visible under the the ".dbrep" file in the "TelosysTools/repos" directory, under the  __"Links between entities"__ tab. 
 
-- As we say on the begining, switch between a relational word to a NoSQL world is not trivial. To simplify this exploration, we manage the  
+- As we say on the beginning, switch between a relational word to a NoSQL world is not trivial. To simplify this exploration, we manage the  
 classic link (Lazy and Eager) as follows :  
 __Lazy__ : Document contain the id of the link (ex : Book contain the author property)  
 __Eager__ :Document contain the all object of the link (embedded doc) (ex: Author is part of the Book document)  
@@ -130,6 +128,7 @@ public class Main {
 		
 	// Book creation
 	Book myBook = new Book();
+	myBook.setId(1);
 	myBook.setAuthor("1");
 	myBook.setTitle("titre de mon livre");
 	

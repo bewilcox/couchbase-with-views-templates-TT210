@@ -6,7 +6,7 @@ Telosys tools 2.1.0 bundle for Couchbase. Include views generation and version m
 Important
 ----------
 The transition from a relational database to a NoSQL document database is not a trivial thing and require to know   
-the business context to achieve an appropriate document design (embedded docuement, duplication ...).   
+the business context to achieve an appropriate document design (embedded document, duplication ...).   
 This bundle can help you familiarize yourself with the NoSQL world by generating from your relational model a simple API for Couchbase.
 
 This bundle allows you to generate for each of your database entities :
@@ -22,7 +22,7 @@ and choose the bundle "couchbase-with-views-bundle-TT210"
 
 
 Generated files
-------------------  
+------------------
 
 * __[table].java__ : POJOs from your database table
 * __[table]Persistence.java__ : Persistence Service for CRUD operations.
