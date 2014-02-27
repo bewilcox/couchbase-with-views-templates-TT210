@@ -36,14 +36,14 @@ public class $entity.name implements Serializable
     // DOCUMENT PRIMARY KEY
     //----------------------------------------------------------------------
 #foreach( $field in $entity.keyAttributes )
-    private $field.formatedType(10) $field.formatedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end;
+    private $field.formattedType(10) $field.formattedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end;
 #end
 
     //----------------------------------------------------------------------
     // DOCUMENT DATA FIELDS 
     //----------------------------------------------------------------------    
 #foreach( $field in $dataFields )
-    private $field.formatedType(10) $field.formatedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end;
+    private $field.formattedType(10) $field.formattedName(12) #if($field.hasInitialValue())= ${field.initialValue} #end;
 #end
 
     //----------------------------------------------------------------------

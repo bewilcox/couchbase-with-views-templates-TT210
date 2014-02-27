@@ -21,12 +21,12 @@ function (doc, meta) {
 #if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
 #if($link.isFetchLAZY() || $link.isFetchDEFAULT())
 //----------------------------------------------------------------------------------
-//-- FOR VIEW ${entity.name}s_by_${link.formatedName(0)}
+//-- FOR VIEW ${entity.name}s_by_${link.formattedFieldName(0)}
 //----------------------------------------------------------------------------------
-//startview ${entity.name}s_by_${link.formatedName(0)}
+//startview ${entity.name}s_by_${link.formattedFieldName(0)}
 function (doc, meta) {
   if(meta.id.match("${entity.name}:")) (
-   emit(doc.${link.formatedName(0)}, null)
+   emit(doc.${link.formattedFieldName(0)}, null)
   )
 }
 //endview

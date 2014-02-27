@@ -45,7 +45,7 @@ public class $entity.name implements Serializable
     // DOCUMENT PRIMARY KEY 
     //----------------------------------------------------------------------
 #foreach( $field in $entity.keyAttributes )
-    private $field.formatedType(4) $field.formatedName(1) #if($field.hasInitialValue())= ${field.initialValue} #end;
+    private $field.formattedType(4) $field.formattedName(1) #if($field.hasInitialValue())= ${field.initialValue} #end;
 #end
 
 
@@ -53,7 +53,7 @@ public class $entity.name implements Serializable
     // DOCUMENT DATA FIELDS 
     //----------------------------------------------------------------------    
 #foreach( $field in $dataFields )
-    private $field.formatedType(4) $field.formatedName(1) #if($field.hasInitialValue())= ${field.initialValue} #end;
+    private $field.formattedType(4) $field.formattedName(1) #if($field.hasInitialValue())= ${field.initialValue} #end;
 #end
 
 
@@ -64,19 +64,19 @@ public class $entity.name implements Serializable
 #if($link.isCardinalityManyToOne() || $link.isCardinalityOneToOne())
 #if($link.isFetchEAGER())
     // Eager like fetching, the document store all the datas of the link.
-#set($linkType = $link.formatedType(1))
+#set($linkType = $link.formattedFieldType(1))
 #else
     // Lazy like fetching, the document store the reference id of the link.
 #set($linkType = "String") ## hard value for the moment : how to retrieve the type of the associated field for this link ?
 #end
-    private $linkType $link.formatedName(0);
+    private $linkType $link.formattedFieldName(0);
 #elseif($link.isCardinalityOneToMany() || $link.isCardinalityManyToMany())
 #if($link.isFetchEAGER())
     // Eager like fetching, the document store all the datas of the link.
-#set($linkType = $link.formatedType(1))
-    private $linkType $link.formatedName(0);
+#set($linkType = $link.formattedFieldType(1))
+    private $linkType $link.formattedFieldName(0);
 #else
-    // Lazy like fetching for $link.targetEntityType, so no link in the document. Use query.
+    // Lazy like fetching for $link.targetEntitySimpleType, so no link in the document. Use query.
 #end
 #end
 #end
@@ -135,7 +135,7 @@ public class $entity.name implements Serializable
 #set($showAccessors = 1)
 #if($link.isFetchEAGER())
     // Eager like fetching, the document store all the datas of the link.
-#set($linkType = $link.formatedType(1))
+#set($linkType = $link.formattedFieldType(1))
 #else
     // Lazy like fetching, the document store the reference id of the link.
 #set($linkType = "String") ## hard value for the moment : how to retrieve the type of the associated field for this link ?
@@ -144,21 +144,21 @@ public class $entity.name implements Serializable
 #if($link.isFetchEAGER())
 #set($showAccessors = 1)
     // Eager like fetching, the document store all the datas of the link.
-#set($linkType = $link.formatedType(1))
+#set($linkType = $link.formattedFieldType(1))
 #else
 #set($showAccessors = 0)
-    // Lazy like fetching for $link.targetEntityType, so no link in the document. Use query.
+    // Lazy like fetching for $link.targetEntitySimpleType, so no link in the document. Use query.
 #end
 #end
 #if($showAccessors == 1)
-#if ( $link.setter )    public void ${link.setter} ( $linkType ${link.javaName}  )
+#if ( $link.setter )    public void ${link.setter} ( $linkType ${link.fieldName}  )
     {
-        this.${link.javaName} = ${link.javaName};
+        this.${link.fieldName} = ${link.fieldName};
     }
 #end
 #if ( $link.getter )    public $linkType ${link.getter} ()
     {
-        return this.${link.javaName};
+        return this.${link.fieldName};
     }
 #end
 #end
@@ -175,7 +175,7 @@ public class $entity.name implements Serializable
 		StringBuffer sb = new StringBuffer(); 
 #foreach( $field in $entity.keyAttributes )
     	sb.append("|");
-		sb.append(${field.formatedName(0)});
+		sb.append(${field.formattedName(0)});
 #end
 #foreach( $link in $entity.selectedLinks )
 #set($includeFieldIntoToString = 0)
@@ -188,12 +188,12 @@ public class $entity.name implements Serializable
 #end
 #if($includeFieldIntoToString == 1)
 		sb.append("|");
-		sb.append(${link.formatedName(0)});
+		sb.append(${link.formattedFieldName(0)});
 #end
 #end  
 #foreach( $field in $dataFields )
 		sb.append("|");
-		sb.append(${field.formatedName(0)});
+		sb.append(${field.formattedName(0)});
 #end  
 		return sb.toString();
     }
